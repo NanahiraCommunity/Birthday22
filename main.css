@@ -1,0 +1,124 @@
+@import url('fonts/mamelon3.css');
+
+body, html {
+	font-family: Mamelon, cursive, sans-serif;
+	font-display: swap;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	background-color: #fdf9f9;
+	background-image: url(img/nanahi-bg-svg.svg);
+	background-size: 100vw;
+
+	--radius: 100vh;
+	--scale: 0.5;
+	--rotation: 0deg;
+}
+
+.collabs {
+	display: block;
+	/* position: absolute; */
+	top: 0;
+	left: 0;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-evenly;
+	perspective: 400vh;
+	transform-style: preserve-3d;
+}
+
+.collabs > div {
+	/* min-width: 40ch; */
+	max-width: 100%;
+	position: relative;
+	overflow: hidden;
+	border-radius: 1vh;
+	margin: 1vh;
+	flex-grow: 0;
+	flex-shrink: 0;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.collabs > div.z3d {
+	position: absolute;
+	max-width: none;
+}
+
+.collabs > div.z3d:before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #e6e6e6;
+	background-image: url(./img/Confetto.png);
+	background-size: 40% auto;
+	background-repeat: no-repeat;
+	background-position: center;
+	transform: rotateY(180deg);
+}
+
+.collabs > div.z3d > * {
+	backface-visibility: hidden;
+}
+
+.collabs > div.w1 { width: 10vh; }
+.collabs > div.w2 { width: 20vh; }
+.collabs > div.w3, .collabs > .music { width: 30vh; }
+.collabs > div.w4 { width: 40vh; }
+.collabs > div.w5 { width: 50vh; }
+.collabs > div.w6 { width: 60vh; }
+.collabs > div.w7 { width: 70vh; }
+.collabs > div.w8 { width: 80vh; }
+.collabs > div.w9 { width: 90vh; }
+.collabs > div.w10 { width: 100vh; }
+
+.collabs > div.h1 { height: 10vh; }
+.collabs > div.h2 { height: 20vh; }
+.collabs > div.h3, .collabs > .music { height: 30vh; }
+.collabs > div.h4 { height: 40vh; }
+.collabs > div.h5 { height: 50vh; }
+.collabs > div.h6 { height: 60vh; }
+.collabs > div.h7 { height: 70vh; }
+.collabs > div.h8 { height: 80vh; }
+.collabs > div.h9 { height: 90vh; }
+.collabs > div.h10 { height: 100vh; }
+
+.collabs > div > .author {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	color: white;
+	padding: 0.5vh 1vh;
+}
+
+.collabs > div > .author:before {
+	display: inline;
+	content: "by ";
+}
+
+.collabs > .image > img,
+.collabs > .game > .thumbnail {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.collabs > .game > iframe {
+	width: 100%;
+	height: 100%;
+}

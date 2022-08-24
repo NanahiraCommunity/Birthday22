@@ -1,0 +1,6 @@
+[submodule "collabs/EatNanahira"]
+	path = collabs/EatNanahira
+	url = https://github.com/Dinlon5566/EatNanahira.git
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/NanahiraCommunity/fonts.git
