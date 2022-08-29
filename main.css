@@ -5,6 +5,8 @@ body, html {
 	font-display: swap;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
+	height: 100vh;
 }
 
 html {
@@ -12,7 +14,7 @@ html {
 	background-image: url(img/nanahi-bg-svg.svg);
 	background-size: 100vw;
 
-	--radius: 100vh;
+	--radius: 90vh;
 	--scale: 0.5;
 	--rotation: 0deg;
 }
@@ -106,6 +108,40 @@ html {
 	content: "by ";
 }
 
+.collabs > div {
+	--scale: 1;
+}
+
+.collabs > div:hover {
+	--scale: 1.05;
+}
+
+.fullscreen-focus {
+	background-color: white;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: auto;
+}
+
+.fullscreen-focus > .author {
+	display: none;
+}
+
+.fullscreen-focus.game {
+	overflow: hidden;
+}
+
+.fullscreen-focus.game > .thumbnail { display: none; }
+.fullscreen-focus.game > iframe {
+	display: block !important;
+	width: 100%;
+	height: 100%;
+}
+
 .collabs > .image > img,
 .collabs > .game > .thumbnail {
 	max-width: 100%;
@@ -121,4 +157,12 @@ html {
 .collabs > .game > iframe {
 	width: 100%;
 	height: 100%;
+}
+
+h1 {
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
 }
