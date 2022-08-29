@@ -1,5 +1,5 @@
 let collabsContainer = document.querySelector(".collabs");
-let items = document.querySelectorAll(".collabs > div");
+let items = Array.prototype.slice.call(document.querySelectorAll(".collabs > div"));
 
 collabsContainer.style.height = "150vh";
 
@@ -17,14 +17,19 @@ requestAnimationFrame(function() {
 	}
 	for (let i = 0; i < items.length; i++) {
 		const item = items[i];
+		var backface = document.createElement("div");
+		backface.className = "backface";
 		const rect = rects[i];
 		item.classList.add("z3d");
-		item.style.width = rect.width + "px";
-		item.style.height = rect.height + "px";
-		item.style.top = "0px";
-		item.style.left = "0px";
+		backface.style.width = item.style.width = rect.width + "px";
+		backface.style.height = item.style.height = rect.height + "px";
+		backface.style.top = item.style.top = "0px";
+		backface.style.left = item.style.left = "0px";
 		let rot = rect.x / totalWidth * 360;
 		item.style.transform = "translateX(-50%) translateY(" + rect.y + "px) rotateY(" + rot + "deg) rotateY(var(--rotation)) translateZ(var(--radius)) scale(var(--scale))";
+		backface.style.transform = item.style.transform + " rotateY(180deg)";
+
+		item.parentElement.insertBefore(backface, item);
 	}
 	
 	collabsContainer.style.transform = "translateX(50vw) scale(var(--scale))";
@@ -58,8 +63,8 @@ updateRotation();
 // })();
 
 let clicked = null;
+var clickTarget = null;
 var clickCoords = []; // for tracking if we moved too much to register as click
-let clickCancel = false;
 let hovered = [];
 for (let i = 0; i < items.length; i++) {
 	items[i].setAttribute("data-i", i.toString());
@@ -73,17 +78,20 @@ for (let i = 0; i < items.length; i++) {
 		hovered[i] = false;
 		updatePointerStatus();
 	});
-	items[i].addEventListener("click", function(e) {
-		if (!clickCancel) {
-			fullscreen(this);
-		}
-	});
 }
 
 document.body.addEventListener("pointerdown", function(e) {
+	if (!isInCollabs(e.target)) return;
+
 	if (!clicked) {
 		clicked = "p" + e.pointerId;
-		clickCancel = false;
+		clickTarget = e.target;
+		while (clickTarget && clickTarget.parentElement && clickTarget.parentElement.className != "collabs") {
+			clickTarget = clickTarget.parentElement;
+		}
+		if (!clickTarget.parentElement)
+			clickTarget = null;
+
 		clickCoords = [e.pageX, e.pageY];
 		updatePointerStatus();
 		document.body.setPointerCapture(e.pointerId);
@@ -91,21 +99,26 @@ document.body.addEventListener("pointerdown", function(e) {
 	}
 });
 
-function removePointer(e) {
-	if (clicked == "p" + e.pointerId) {
-		clicked = null;
-		updatePointerStatus();
-		document.body.releasePointerCapture(e.pointerId);
-		e.preventDefault();
-	}
+function removePointer(cancelled) {
+	return function (e) {
+		if (clicked == "p" + e.pointerId) {
+			if (clickTarget && !cancelled) {
+				fullscreen(clickTarget);
+			}
+			clicked = null;
+			updatePointerStatus();
+			document.body.releasePointerCapture(e.pointerId);
+			e.preventDefault();
+		}
+	};
 }
-document.body.addEventListener("pointerup", removePointer);
-document.body.addEventListener("pointercancel", removePointer);
+document.body.addEventListener("pointerup", removePointer(false));
+document.body.addEventListener("pointercancel", removePointer(true));
 
 document.body.addEventListener("pointermove", function(e) {
 	if (clicked == "p" + e.pointerId) {
 		if (Math.sqrt((clickCoords[0] - e.pageX) * (clickCoords[0] - e.pageX) + (clickCoords[1] - e.pageY) * (clickCoords[1] - e.pageY))
-			> 8) clickCancel = true;
+			> 8) clickTarget = null; // cancel click
 		velocity -= e.movementX;
 		updatePointerStatus();
 		e.preventDefault();
@@ -113,8 +126,18 @@ document.body.addEventListener("pointermove", function(e) {
 });
 
 document.body.addEventListener("wheel", function(e) {
+	if (!isInCollabs(e.target)) return;
 	velocity += e.deltaY;
 });
+
+function isInCollabs(elem) {
+	while (elem) {
+		if (elem.className == "collabs")
+			return true;
+		elem = elem.parentElement;
+	}
+	return false;
+}
 
 function updatePointerStatus() {
 	doRotate = hovered.every(v => v == false) && !clicked;
@@ -135,4 +158,27 @@ function fullscreen(div) {
 	document.body.appendChild(copy);
 	copy.setAttribute("style", "");
 	copy.classList.add("fullscreen-focus");
+
+	var close = document.createElement("div");
+	close.className = "close";
+	close.textContent = "close";
+	copy.appendChild(close);
+	close.addEventListener("click", function() {
+		document.body.removeChild(copy);
+		eschandler = null;
+	});
+
+	eschandler = function() {
+		document.body.removeChild(copy);
+		eschandler = null;
+	};
 }
+
+let eschandler = null;
+document.addEventListener("keydown", function(e) {
+	if (e.key == "Escape") {
+		if (eschandler) {
+			eschandler();
+		}
+	}
+});

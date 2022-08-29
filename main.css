@@ -49,26 +49,19 @@ html {
 .collabs > div.z3d {
 	position: absolute;
 	max-width: none;
+	backface-visibility: hidden;
 }
 
-.collabs > div.z3d:before {
-	content: "";
-	display: block;
+.collabs > .backface {
 	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
+	max-width: none;
+	backface-visibility: hidden;
+	display: block;
 	background-color: #e6e6e6;
 	background-image: url(./img/Confetto.png);
 	background-size: 40% auto;
 	background-repeat: no-repeat;
 	background-position: center;
-	transform: rotateY(180deg);
-}
-
-.collabs > div.z3d > * {
-	backface-visibility: hidden;
 }
 
 .collabs > div.w1 { width: 10vh; }
@@ -131,6 +124,33 @@ html {
 	display: none;
 }
 
+.fullscreen-focus > .close {
+	position: fixed;
+	top: 1em;
+	right: 1em;
+	width: 2em;
+	height: 2em;
+	margin: 0;
+	padding: 0;
+	background-color: #fdf9f9;
+	color: black;
+	border-radius: 100%;
+	z-index: 100;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+}
+
+.fullscreen-focus > .close:before {
+	content: "🗙";
+	display: block;
+	width: 2em;
+	height: 2em;
+	margin: 0;
+	padding: 0;
+	line-height: 1.8em;
+	text-align: center;
+}
+
 .fullscreen-focus.game {
 	overflow: hidden;
 }
@@ -166,3 +186,4 @@ h1 {
 	left: 0;
 	right: 0;
 }
+
