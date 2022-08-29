@@ -131,6 +131,7 @@ document.body.addEventListener("wheel", function(e) {
 });
 
 function isInCollabs(elem) {
+	if (elem == document.body) return true;
 	while (elem) {
 		if (elem.className == "collabs")
 			return true;
@@ -143,12 +144,7 @@ function updatePointerStatus() {
 	doRotate = hovered.every(v => v == false) && !clicked;
 }
 
-// TODO: add a little x rotation
-// TODO: this doesn't seem to work in chrome
 // TODO: scale and radius need to be optimized and calculated for the given screen dimensions
-
-// TODO: add clicking on tiles to fullscreen them
-// TODO: make game thumbnails show iframes
 
 /**
  * @param {HTMLDivElement} div 
