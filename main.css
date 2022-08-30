@@ -273,7 +273,7 @@ h1 {
 }
 
 #loadingscreen.loaded {
-	animation: hidefull 0.3s ease-out 8s;
+	animation: hidefull 0.3s ease-out 6s;
 	animation-fill-mode: both;
 }
 
@@ -293,7 +293,7 @@ h1 {
 	transform-origin: center center;
 
 	background: repeating-linear-gradient(90deg, transparent 0px, transparent 15px, white 15px, white 50px);
-	animation: stripes1 8s linear;
+	animation: stripes1 6s linear;
 	animation-fill-mode: both;
 	z-index: 20;
 }
@@ -317,7 +317,7 @@ h1 {
 	top: 50vh;
 	left: 50vw;
 	transform: translate(-50%, -50%);
-	animation: title 8s linear;
+	animation: title 6s linear;
 	animation-fill-mode: both;
 	z-index: 10;
 	margin: 0;
@@ -327,19 +327,19 @@ h1 {
 
 #loadingscreen.loaded .circle1 {
 	background-color: #FECCDF;
-	animation: circle1 8s linear;
+	animation: circle1 6s linear;
 	animation-fill-mode: both;
 }
 
 #loadingscreen.loaded .circle2 {
 	background-color: #FEF8AD;
-	animation: circle2 8s linear;
+	animation: circle2 6s linear;
 	animation-fill-mode: both;
 }
 
 #loadingscreen.loaded .circle3 {
 	background-color: #A9FFD4;
-	animation: circle3 8s linear;
+	animation: circle3 6s linear;
 	animation-fill-mode: both;
 }
 
@@ -373,7 +373,7 @@ h1 {
 	0% {
 		opacity: 0;
 	}
-	72% { opacity: 0; transform: scale(4) rotate(-22.5deg) translateY(50vmax); }
+	70% { opacity: 0; transform: scale(4) rotate(-22.5deg) translateY(50vmax); }
 	73% { opacity: 1; }
 	80% { transform: scale(4) rotate(-22.5deg) translateY(50vmax); }
 	90% { opacity: 1; transform: scale(4) rotate(-22.5deg) translateY(0); }
@@ -384,7 +384,7 @@ h1 {
 	0% {
 		opacity: 0;
 	}
-	72% { opacity: 0; transform: scale(4) rotate(-22.5deg); }
+	70% { opacity: 0; transform: scale(4) rotate(-22.5deg); }
 	73% { opacity: 1; }
 	80% { transform: scale(4) rotate(-22.5deg); }
 	90% { opacity: 1; transform: scale(4) rotate(-22.5deg) translateY(50vmax); }
@@ -395,7 +395,7 @@ h1 {
 	0% {
 		opacity: 0;
 	}
-	72% { opacity: 0; transform: scale(4) rotate(-22.5deg) translateY(50vmax); }
+	70% { opacity: 0; transform: scale(4) rotate(-22.5deg) translateY(50vmax); }
 	73% { opacity: 1; }
 	80% { transform: scale(4) rotate(-22.5deg) translateY(50vmax); }
 	90% { opacity: 1; transform: scale(4) rotate(-22.5deg) translateY(0); }
@@ -408,5 +408,7 @@ h1 {
 	22% { display: none; opacity: 0; }
 	24% { display: block; opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
 	25% { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
-	100% { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+	55% { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+	60% { display: block; opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+	100% { display: block; opacity: 0; transform: translate(-50%, -50%) scale(1); }
 }

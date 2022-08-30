@@ -199,8 +199,8 @@ window.addEventListener("load", function() {
 	loadingscreen.classList.add("loaded");
 	setTimeout(function() {
 		pageLoaded();
-	}, 7950);
+	}, 5950);
 	setTimeout(function() {
 		loadingscreen.parentElement.removeChild(loadingscreen);
-	}, 8500);
+	}, 6300);
 });
