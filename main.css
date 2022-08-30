@@ -94,9 +94,11 @@ html {
 	background-color: rgba(0, 0, 0, 0.4);
 	color: white;
 	padding: 0.5vh 1vh;
+	font-size: 2rem;
 }
 
-.collabs > div > .author:before {
+.collabs > div > .author:before,
+.fullscreen-focus > .author:before {
 	display: inline;
 	content: "by ";
 }
@@ -121,7 +123,16 @@ html {
 }
 
 .fullscreen-focus > .author {
-	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 1rem;
+	z-index: 10;
+	background-color: #fdf9f9;
+	color: black;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+	padding: 1rem;
+	border-bottom-right-radius: 2rem;
 }
 
 .fullscreen-focus > .close {
