@@ -8,6 +8,7 @@ body, html {
 	overflow-x: hidden;
 	overflow-y: hidden;
 	height: 100vh;
+	touch-action: none;
 }
 
 body {
@@ -37,7 +38,6 @@ html {
 	justify-content: space-evenly;
 	perspective: 400vh;
 	transform-style: preserve-3d;
-	touch-action: none;
 }
 
 .collabs > div {
@@ -126,6 +126,7 @@ html {
 	width: 100vw;
 	height: 100vh;
 	overflow: auto;
+	touch-action: manipulation;
 }
 
 .fullscreen-focus > .author {
