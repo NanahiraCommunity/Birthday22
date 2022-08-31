@@ -81,7 +81,7 @@ function pageLoaded() {
 		});
 	}
 
-	document.body.addEventListener("pointerdown", function(e) {
+	window.addEventListener("pointerdown", function(e) {
 		if (!isInCollabs(e.target)) return;
 
 		if (!clicked) {
@@ -95,7 +95,7 @@ function pageLoaded() {
 
 			clickCoords = [e.pageX, e.pageY];
 			updatePointerStatus();
-			document.body.setPointerCapture(e.pointerId);
+			// document.body.setPointerCapture(e.pointerId);
 			e.preventDefault();
 		}
 	});
@@ -108,25 +108,25 @@ function pageLoaded() {
 				}
 				clicked = null;
 				updatePointerStatus();
-				document.body.releasePointerCapture(e.pointerId);
+				// document.body.releasePointerCapture(e.pointerId);
 				e.preventDefault();
 			}
 		};
 	}
-	document.body.addEventListener("pointerup", removePointer(false));
-	document.body.addEventListener("pointercancel", removePointer(true));
+	window.addEventListener("pointerup", removePointer(false));
+	window.addEventListener("pointercancel", removePointer(true));
 
-	document.body.addEventListener("pointermove", function(e) {
+	window.addEventListener("pointermove", function(e) {
 		if (clicked == "p" + e.pointerId) {
 			if (Math.sqrt((clickCoords[0] - e.pageX) * (clickCoords[0] - e.pageX) + (clickCoords[1] - e.pageY) * (clickCoords[1] - e.pageY))
 				> 8) clickTarget = null; // cancel click
-			velocity -= e.movementX;
+			velocity -= e.movementX * 3;
 			updatePointerStatus();
 			e.preventDefault();
 		}
 	});
 
-	document.body.addEventListener("wheel", function(e) {
+	window.addEventListener("wheel", function(e) {
 		if (!isInCollabs(e.target)) return;
 		velocity += e.deltaY;
 	});
